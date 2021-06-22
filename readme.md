@@ -3,11 +3,11 @@
 * [honeo/unrar-promise](https://github.com/honeo/unrar-promise)  
 * [unrar-promise](https://www.npmjs.com/package/unrar-promise)
 
-## なにこれ
+## What's This
 
-かんたん.rar展開モジュール。
+Easy .rar expansion module.
 
-## 使い方
+## How to use
 
 ```sh
 $npm i unrar-promise
@@ -21,24 +21,23 @@ await unrar('archive.rar', './output');
 
 ## API
 
-* 出力先について
-  * ファイルが既にあればスキップする。
-  * ディレクトリがなければ作成する。
-  * [node-sanitize-filename](https://github.com/parshap/node-sanitize-filename)で正規化する。
+* About output destination
+* Skip the file if it already exists.
+* If the directory does not exist, create it.
+* [node-sanitize-filename](https://github.com/parshap/node-sanitize-filename)Normalize with
 
-### options
+### Options
 
 | key       | type     | default | description                                                           |
 |:--------- |:-------- | ------- | --------------------------------------------------------------------- |
-| filter    | function |         | 出力するコンテンツ毎にobjectを引数に実行され、falseが返ればskipする。 |
-| overwrite | boolean  | false   | 上書きを許可するか。                                                  |
-| password  | string   |     ""    | 書庫のパスワード。                                                    |
-
+| filter    | function |         | Executed with object as an argument for each output content、Skip if false。 |
+| overwrite | boolean  | false   | Do you want to allow overwriting?                                                  |
+| password  | string   |     ""    | Archive password.                                                    |
 
 ### unrar(inputFile, outputDir [, options])
 
-引数1パスの.rar書庫を引数2のディレクトリへ展開する。  
-展開先ディレクトリのパスを引数に解決するpromiseを返す。
+Expand the .rar archive with 1 argument path to the directory with 2 arguments.  
+Returns a promise that resolves to the path of the extraction directory as an argument.
 
 ```js
 // hoge.rar => output/...
@@ -56,8 +55,8 @@ const dirPath = await unrar('hoge.rar', 'output', {
 
 ### list(inputFile [, options])
 
-引数1パスの.rar書庫が持つコンテンツ一覧を配列で取得する。  
-取得した配列を引数に解決するpromiseを返す。
+Get the content list of .rar archive with 1 argument path as an array.
+Returns a promise that resolves the obtained array as an argument.
 
 ```js
 const arr = await list('hoge.rar'); // [..."path"]
@@ -73,6 +72,6 @@ const arr = await list('foobar.rar', {
 ### v1 => v2
 
 * .extract(), extractAll()
-  * 廃止して.unrar()に統合。
+  * Abolished and integrated into .unrar ().
 * .list()
-  * 引数2をstringからobjectに変更。
+  * Change argument 2 from string to object.
